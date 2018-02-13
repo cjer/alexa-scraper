@@ -99,7 +99,7 @@ def scrape(n=50, sub_dir="topsites", local="global", sub_local=""):
 					"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 					"Connection": "keep-alive" }
 
-	# To calculate time for programme to run
+	# To calculate time for programme to return
 	start = time.clock()
 
 	# Get the number of pages we need to scrape
@@ -107,23 +107,28 @@ def scrape(n=50, sub_dir="topsites", local="global", sub_local=""):
 	final_list = []
 
 	for page_num in range(num_of_pages):
-
 		# Generate the complete url based on input
-		full_url = "http://www.alexa.com/" + sub_dir + "/" + local + ";" + str(page_num) + "/" + str(sub_local)
+
+		if page_num==0:
+			full_url = "https://web.archive.org/web/20161227080511/https://www.alexa.com/" + sub_dir + "/" + local + "/" + str(sub_local)
+		else:
+			full_url = "https://web.archive.org/web/20161227080511/https://www.alexa.com/" + sub_dir + "/" + local + ";" + str(page_num) + "/" + str(sub_local)
 
 		# Collect page data for current page
 		page = ""
 
 		# Try Making a request
 		try:
+			print (full_url)
 			request = Request(full_url, headers=request_headers)
 		except e:
 			print(e.reason)
 
 		try:
 			response = urlopen(request)
-		except e:
-			print(e.reason)
+		except Exception:
+			#print(e.reason)
+			continue
 		
 		for line in response:
 			line = line.decode('utf-8','ignore')
