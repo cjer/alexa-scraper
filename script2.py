@@ -110,9 +110,9 @@ def scrape(n=50, sub_dir="topsites", local="global", sub_local=""):
 		# Generate the complete url based on input
 
 		if page_num==0:
-			full_url = "https://web.archive.org/web/20161227080511/https://www.alexa.com/" + sub_dir + "/" + local + "/" + str(sub_local)
+			full_url = "https://web.archive.org/web/20160414140438/https://www.alexa.com/" + sub_dir + "/" + local + "/" + str(sub_local)
 		else:
-			full_url = "https://web.archive.org/web/20161227080511/https://www.alexa.com/" + sub_dir + "/" + local + ";" + str(page_num) + "/" + str(sub_local)
+			full_url = "https://web.archive.org/web/20160414140438/https://www.alexa.com/" + sub_dir + "/" + local + ";" + str(page_num) + "/" + str(sub_local)
 
 		# Collect page data for current page
 		page = ""
